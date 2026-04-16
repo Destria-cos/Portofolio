@@ -1,685 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fadillah Nurwahid Mursid — Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <title>Fadillah Nurwahid Mursid</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
 
-  <!-- Cursor -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-follower" id="cursorFollower"></div>
-
-  <!-- Loader -->
-  <div class="loader" id="loader">
-    <div class="loader-inner">
-      <div class="loader-text">
-        <span>F</span><span>A</span><span>D</span><span>I</span><span>L</span><span>L</span><span>A</span><span>H</span>
-      </div>
-      <div class="loader-bar"><div class="loader-progress" id="loaderProgress"></div></div>
-      <div class="loader-percent" id="loaderPercent">0%</div>
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="logo">FNM</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
-  </div>
-
-  <!-- Navigation -->
-  <nav class="nav" id="nav">
-    <div class="nav-logo">FNM</div>
-    <ul class="nav-links">
-      <li><a href="#hero" class="nav-link" data-text="Home">Home</a></li>
-      <li><a href="#about" class="nav-link" data-text="About">About</a></li>
-      <li><a href="#skills" class="nav-link" data-text="Skills">Skills</a></li>
-      <li><a href="#projects" class="nav-link" data-text="Projects">Projects</a></li>
-      <li><a href="#testimonials" class="nav-link" data-text="Reviews">Reviews</a></li>
-      <li><a href="#contact" class="nav-link" data-text="Contact">Contact</a></li>
-    </ul>
-    <div class="nav-toggle" id="navToggle">
-      <span></span><span></span><span></span>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li><a href="#hero" class="mobile-link">Home</a></li>
-      <li><a href="#about" class="mobile-link">About</a></li>
-      <li><a href="#skills" class="mobile-link">Skills</a></li>
-      <li><a href="#projects" class="mobile-link">Projects</a></li>
-      <li><a href="#testimonials" class="mobile-link">Reviews</a></li>
-      <li><a href="#contact" class="mobile-link">Contact</a></li>
-    </ul>
-  </div>
-
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <canvas id="particleCanvas"></canvas>
-    <div class="hero-bg-grid"></div>
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        Available for work
-      </div>
-      <h1 class="hero-title">
-        <span class="hero-greeting">Hello, I'm</span>
-        <span class="hero-name" id="heroName">Fadillah<br/>Nurwahid<br/>Mursid</span>
-      </h1>
-      <div class="hero-roles">
-        <span class="role-prefix">I'm a </span>
-        <span class="role-text" id="roleText"></span>
-        <span class="role-cursor">|</span>
-      </div>
-      <p class="hero-desc">
-        Crafting digital experiences that blend creativity with cutting-edge technology. 
-        Passionate about building things that matter.
-      </p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">
-          <span>View My Work</span>
-          <i class="fas fa-arrow-right"></i>
-        </a>
-        <a href="#contact" class="btn btn-outline">
-          <span>Get In Touch</span>
-        </a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-num" data-target="3">0</span>
-          <span class="stat-label">Years Exp.</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-num" data-target="20">0</span>
-          <span class="stat-label">Projects Done</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-num" data-target="15">0</span>
-          <span class="stat-label">Happy Clients</span>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <span class="badge"><span class="dot"></span> Available for work</span>
+        <h1>Fadillah<br/><span>Nurwahid Mursid</span></h1>
+        <p class="role">Full Stack Developer &amp; UI Designer</p>
+        <p class="desc">Building clean, fast, and meaningful digital experiences from Indonesia.</p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn-primary">View Work</a>
+          <a href="#contact" class="btn-ghost">Contact Me</a>
         </div>
       </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-avatar-wrap">
-        <div class="avatar-ring ring-1"></div>
-        <div class="avatar-ring ring-2"></div>
-        <div class="avatar-ring ring-3"></div>
-        <div class="avatar-img">
-          <div class="avatar-placeholder">
-            <span>FNM</span>
-          </div>
-        </div>
-        <div class="avatar-badge badge-top">
-          <i class="fas fa-code"></i>
-          <span>Developer</span>
-        </div>
-        <div class="avatar-badge badge-bottom">
-          <i class="fas fa-palette"></i>
-          <span>Designer</span>
+      <div class="hero-card">
+        <div class="avatar">FNM</div>
+        <div class="hero-stats">
+          <div class="hstat"><strong>3+</strong><span>Years Exp.</span></div>
+          <div class="hstat"><strong>20+</strong><span>Projects</span></div>
+          <div class="hstat"><strong>15+</strong><span>Clients</span></div>
         </div>
       </div>
-    </div>
-    <div class="scroll-indicator">
-      <div class="scroll-mouse">
-        <div class="scroll-wheel"></div>
-      </div>
-      <span>Scroll Down</span>
     </div>
   </section>
 
-  <!-- About Section -->
-  <section class="about" id="about">
+  <!-- ABOUT -->
+  <section id="about">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Who I Am</span>
-        <h2 class="section-title">About <span class="highlight">Me</span></h2>
-        <p class="section-sub">A passionate developer with a love for clean code and beautiful design</p>
-      </div>
+      <div class="sec-label">About Me</div>
+      <h2>Who I Am</h2>
       <div class="about-grid">
-        <div class="about-left">
-          <div class="about-card-wrap">
-            <div class="about-card">
-              <div class="card-glow"></div>
-              <div class="about-info-grid">
-                <div class="info-item">
-                  <i class="fas fa-user"></i>
-                  <div>
-                    <span class="info-label">Full Name</span>
-                    <span class="info-value">Fadillah Nurwahid Mursid</span>
-                  </div>
-                </div>
-                <div class="info-item">
-                  <i class="fas fa-map-marker-alt"></i>
-                  <div>
-                    <span class="info-label">Location</span>
-                    <span class="info-value">Indonesia</span>
-                  </div>
-                </div>
-                <div class="info-item">
-                  <i class="fas fa-briefcase"></i>
-                  <div>
-                    <span class="info-label">Status</span>
-                    <span class="info-value status-open">Open to Work</span>
-                  </div>
-                </div>
-                <div class="info-item">
-                  <i class="fas fa-graduation-cap"></i>
-                  <div>
-                    <span class="info-label">Education</span>
-                    <span class="info-value">Computer Science</span>
-                  </div>
-                </div>
-              </div>
-              <a href="#" class="btn btn-primary btn-sm">
-                <i class="fas fa-download"></i>
-                Download CV
-              </a>
-            </div>
-          </div>
-          <div class="floating-icons">
-            <div class="float-icon" style="--delay:0s"><i class="fab fa-react"></i></div>
-            <div class="float-icon" style="--delay:0.5s"><i class="fab fa-js"></i></div>
-            <div class="float-icon" style="--delay:1s"><i class="fab fa-python"></i></div>
-            <div class="float-icon" style="--delay:1.5s"><i class="fab fa-node-js"></i></div>
-          </div>
+        <div class="about-info">
+          <div class="info-row"><i class="fas fa-user"></i><div><small>Full Name</small><span>Fadillah Nurwahid Mursid</span></div></div>
+          <div class="info-row"><i class="fas fa-map-marker-alt"></i><div><small>Location</small><span>Indonesia</span></div></div>
+          <div class="info-row"><i class="fas fa-graduation-cap"></i><div><small>Education</small><span>Computer Science</span></div></div>
+          <div class="info-row"><i class="fas fa-briefcase"></i><div><small>Status</small><span class="green">Open to Work</span></div></div>
+          <a href="#" class="btn-primary" style="margin-top:1rem;display:inline-flex;gap:.5rem;align-items:center"><i class="fas fa-download"></i> Download CV</a>
         </div>
-        <div class="about-right">
-          <div class="about-text">
-            <p class="about-intro">
-              Hi! I'm <strong>Fadillah Nurwahid Mursid</strong>, a dedicated software developer and creative thinker based in Indonesia.
-            </p>
-            <p>
-              I specialize in building modern web applications and digital experiences that are both functional and visually compelling. My journey in tech started with curiosity and has grown into a deep passion for solving real-world problems through code.
-            </p>
-            <p>
-              When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or sketching out ideas for my next big project.
-            </p>
-          </div>
-          <div class="timeline">
-            <h3 class="timeline-title">My Journey</h3>
-            <div class="timeline-items">
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                  <span class="timeline-year">2024 — Present</span>
-                  <h4>Senior Frontend Developer</h4>
-                  <p>Leading UI/UX development for enterprise applications</p>
-                </div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                  <span class="timeline-year">2022 — 2024</span>
-                  <h4>Full Stack Developer</h4>
-                  <p>Built scalable web apps using React, Node.js & PostgreSQL</p>
-                </div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                  <span class="timeline-year">2021 — 2022</span>
-                  <h4>Junior Developer</h4>
-                  <p>Started career building responsive websites and APIs</p>
-                </div>
-              </div>
-            </div>
+        <div class="about-text">
+          <p>Hi! I am <strong>Fadillah Nurwahid Mursid</strong>, a dedicated software developer and creative thinker based in Indonesia.</p>
+          <p>I specialize in building modern web applications that are both functional and visually compelling. My journey in tech started with curiosity and grew into a deep passion for solving real-world problems through code.</p>
+          <p>When I am not coding, I explore new technologies, contribute to open-source, or sketch ideas for my next project.</p>
+          <div class="tags">
+            <span>React</span><span>Node.js</span><span>Python</span><span>UI/UX</span><span>Docker</span><span>PostgreSQL</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
-  <section class="skills" id="skills">
-    <div class="skills-bg"></div>
+  <!-- SKILLS -->
+  <section id="skills">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">What I Know</span>
-        <h2 class="section-title">My <span class="highlight">Skills</span></h2>
-        <p class="section-sub">Technologies and tools I work with every day</p>
-      </div>
-      <div class="skills-tabs">
-        <button class="tab-btn active" data-tab="frontend">Frontend</button>
-        <button class="tab-btn" data-tab="backend">Backend</button>
-        <button class="tab-btn" data-tab="tools">Tools</button>
-      </div>
-      <div class="skills-content">
-        <div class="tab-panel active" id="tab-frontend">
-          <div class="skills-grid">
-            <div class="skill-card" data-level="90">
-              <div class="skill-icon"><i class="fab fa-html5"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">HTML5</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
-                <span class="skill-percent">90%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="85">
-              <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">CSS3 / SASS</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
-                <span class="skill-percent">85%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="88">
-              <div class="skill-icon"><i class="fab fa-js"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">JavaScript</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
-                <span class="skill-percent">88%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="82">
-              <div class="skill-icon"><i class="fab fa-react"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">React.js</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
-                <span class="skill-percent">82%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="75">
-              <div class="skill-icon"><i class="fab fa-vuejs"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">Vue.js</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
-                <span class="skill-percent">75%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="80">
-              <div class="skill-icon"><i class="fas fa-wind"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">Tailwind CSS</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
-                <span class="skill-percent">80%</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="tab-panel" id="tab-backend">
-          <div class="skills-grid">
-            <div class="skill-card" data-level="80">
-              <div class="skill-icon"><i class="fab fa-node-js"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">Node.js</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
-                <span class="skill-percent">80%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="78">
-              <div class="skill-icon"><i class="fab fa-python"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">Python</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
-                <span class="skill-percent">78%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="72">
-              <div class="skill-icon"><i class="fas fa-database"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">PostgreSQL</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
-                <span class="skill-percent">72%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="70">
-              <div class="skill-icon"><i class="fas fa-leaf"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">MongoDB</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
-                <span class="skill-percent">70%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="75">
-              <div class="skill-icon"><i class="fas fa-server"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">REST APIs</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
-                <span class="skill-percent">75%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="65">
-              <div class="skill-icon"><i class="fas fa-project-diagram"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">GraphQL</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
-                <span class="skill-percent">65%</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="tab-panel" id="tab-tools">
-          <div class="skills-grid">
-            <div class="skill-card" data-level="88">
-              <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">Git / GitHub</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
-                <span class="skill-percent">88%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="75">
-              <div class="skill-icon"><i class="fab fa-docker"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">Docker</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
-                <span class="skill-percent">75%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="70">
-              <div class="skill-icon"><i class="fab fa-figma"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">Figma</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
-                <span class="skill-percent">70%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="72">
-              <div class="skill-icon"><i class="fas fa-cloud"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">AWS / Cloud</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
-                <span class="skill-percent">72%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="80">
-              <div class="skill-icon"><i class="fas fa-terminal"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">Linux / CLI</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
-                <span class="skill-percent">80%</span>
-              </div>
-            </div>
-            <div class="skill-card" data-level="68">
-              <div class="skill-icon"><i class="fas fa-infinity"></i></div>
-              <div class="skill-info">
-                <span class="skill-name">CI/CD</span>
-                <div class="skill-bar"><div class="skill-fill" data-width="68"></div></div>
-                <span class="skill-percent">68%</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="sec-label">Skills</div>
+      <h2>What I Know</h2>
+      <div class="skills-grid">
+        <div class="skill-item"><div class="skill-top"><span><i class="fab fa-html5"></i> HTML5</span><span>90%</span></div><div class="bar"><div class="fill" data-w="90"></div></div></div>
+        <div class="skill-item"><div class="skill-top"><span><i class="fab fa-css3-alt"></i> CSS3</span><span>85%</span></div><div class="bar"><div class="fill" data-w="85"></div></div></div>
+        <div class="skill-item"><div class="skill-top"><span><i class="fab fa-js"></i> JavaScript</span><span>88%</span></div><div class="bar"><div class="fill" data-w="88"></div></div></div>
+        <div class="skill-item"><div class="skill-top"><span><i class="fab fa-react"></i> React.js</span><span>82%</span></div><div class="bar"><div class="fill" data-w="82"></div></div></div>
+        <div class="skill-item"><div class="skill-top"><span><i class="fab fa-node-js"></i> Node.js</span><span>80%</span></div><div class="bar"><div class="fill" data-w="80"></div></div></div>
+        <div class="skill-item"><div class="skill-top"><span><i class="fab fa-python"></i> Python</span><span>78%</span></div><div class="bar"><div class="fill" data-w="78"></div></div></div>
+        <div class="skill-item"><div class="skill-top"><span><i class="fas fa-database"></i> PostgreSQL</span><span>72%</span></div><div class="bar"><div class="fill" data-w="72"></div></div></div>
+        <div class="skill-item"><div class="skill-top"><span><i class="fab fa-git-alt"></i> Git</span><span>88%</span></div><div class="bar"><div class="fill" data-w="88"></div></div></div>
+        <div class="skill-item"><div class="skill-top"><span><i class="fab fa-docker"></i> Docker</span><span>75%</span></div><div class="bar"><div class="fill" data-w="75"></div></div></div>
+        <div class="skill-item"><div class="skill-top"><span><i class="fab fa-figma"></i> Figma</span><span>70%</span></div><div class="bar"><div class="fill" data-w="70"></div></div></div>
       </div>
     </div>
   </section>
 
-  <!-- Projects Section -->
-  <section class="projects" id="projects">
+  <!-- PROJECTS -->
+  <section id="projects">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">My Work</span>
-        <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
-        <p class="section-sub">A selection of projects I'm proud of</p>
-      </div>
-      <div class="projects-filter">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="web">Web App</button>
-        <button class="filter-btn" data-filter="mobile">Mobile</button>
-        <button class="filter-btn" data-filter="design">Design</button>
-      </div>
+      <div class="sec-label">Projects</div>
+      <h2>My Work</h2>
       <div class="projects-grid">
-        <div class="project-card" data-category="web">
-          <div class="project-img">
-            <div class="project-placeholder p1">
-              <i class="fas fa-shopping-cart"></i>
-            </div>
-            <div class="project-overlay">
-              <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-              <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-          <div class="project-info">
-            <div class="project-tags">
-              <span>React</span><span>Node.js</span><span>MongoDB</span>
-            </div>
+        <div class="project-card">
+          <div class="proj-icon p1"><i class="fas fa-shopping-cart"></i></div>
+          <div class="proj-body">
+            <div class="proj-tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
             <h3>E-Commerce Platform</h3>
-            <p>Full-stack e-commerce solution with real-time inventory, payment integration, and admin dashboard.</p>
+            <p>Full-stack store with real-time inventory, payments, and admin dashboard.</p>
+            <div class="proj-links"><a href="#"><i class="fas fa-external-link-alt"></i> Live</a><a href="#"><i class="fab fa-github"></i> Code</a></div>
           </div>
         </div>
-        <div class="project-card featured" data-category="web">
-          <div class="project-featured-badge">Featured</div>
-          <div class="project-img">
-            <div class="project-placeholder p2">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <div class="project-overlay">
-              <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-              <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-          <div class="project-info">
-            <div class="project-tags">
-              <span>Vue.js</span><span>Python</span><span>PostgreSQL</span>
-            </div>
+        <div class="project-card">
+          <div class="proj-icon p2"><i class="fas fa-chart-line"></i></div>
+          <div class="proj-body">
+            <div class="proj-tags"><span>Vue.js</span><span>Python</span><span>PostgreSQL</span></div>
             <h3>Analytics Dashboard</h3>
-            <p>Real-time data visualization platform with interactive charts, custom reports, and team collaboration.</p>
+            <p>Real-time data visualization with interactive charts and team collaboration.</p>
+            <div class="proj-links"><a href="#"><i class="fas fa-external-link-alt"></i> Live</a><a href="#"><i class="fab fa-github"></i> Code</a></div>
           </div>
         </div>
-        <div class="project-card" data-category="mobile">
-          <div class="project-img">
-            <div class="project-placeholder p3">
-              <i class="fas fa-mobile-alt"></i>
-            </div>
-            <div class="project-overlay">
-              <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-              <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-          <div class="project-info">
-            <div class="project-tags">
-              <span>React Native</span><span>Firebase</span>
-            </div>
-            <h3>Task Manager App</h3>
-            <p>Cross-platform productivity app with smart reminders, team sync, and offline support.</p>
-          </div>
-        </div>
-        <div class="project-card" data-category="design">
-          <div class="project-img">
-            <div class="project-placeholder p4">
-              <i class="fas fa-paint-brush"></i>
-            </div>
-            <div class="project-overlay">
-              <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-              <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-          <div class="project-info">
-            <div class="project-tags">
-              <span>Figma</span><span>UI/UX</span>
-            </div>
-            <h3>Design System</h3>
-            <p>Comprehensive design system with 200+ components, tokens, and documentation for enterprise use.</p>
-          </div>
-        </div>
-        <div class="project-card" data-category="web">
-          <div class="project-img">
-            <div class="project-placeholder p5">
-              <i class="fas fa-comments"></i>
-            </div>
-            <div class="project-overlay">
-              <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-              <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-          <div class="project-info">
-            <div class="project-tags">
-              <span>Next.js</span><span>Socket.io</span><span>Redis</span>
-            </div>
+        <div class="project-card">
+          <div class="proj-icon p3"><i class="fas fa-comments"></i></div>
+          <div class="proj-body">
+            <div class="proj-tags"><span>Next.js</span><span>Socket.io</span><span>Redis</span></div>
             <h3>Real-time Chat App</h3>
-            <p>Scalable messaging platform with end-to-end encryption, file sharing, and video calls.</p>
+            <p>Scalable messaging platform with encryption and file sharing.</p>
+            <div class="proj-links"><a href="#"><i class="fas fa-external-link-alt"></i> Live</a><a href="#"><i class="fab fa-github"></i> Code</a></div>
           </div>
         </div>
-        <div class="project-card" data-category="mobile">
-          <div class="project-img">
-            <div class="project-placeholder p6">
-              <i class="fas fa-heartbeat"></i>
-            </div>
-            <div class="project-overlay">
-              <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-              <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-            </div>
+        <div class="project-card">
+          <div class="proj-icon p4"><i class="fas fa-mobile-alt"></i></div>
+          <div class="proj-body">
+            <div class="proj-tags"><span>React Native</span><span>Firebase</span></div>
+            <h3>Task Manager App</h3>
+            <p>Cross-platform productivity app with smart reminders and offline support.</p>
+            <div class="proj-links"><a href="#"><i class="fas fa-external-link-alt"></i> Live</a><a href="#"><i class="fab fa-github"></i> Code</a></div>
           </div>
-          <div class="project-info">
-            <div class="project-tags">
-              <span>Flutter</span><span>Dart</span><span>API</span>
-            </div>
+        </div>
+        <div class="project-card">
+          <div class="proj-icon p5"><i class="fas fa-paint-brush"></i></div>
+          <div class="proj-body">
+            <div class="proj-tags"><span>Figma</span><span>UI/UX</span></div>
+            <h3>Design System</h3>
+            <p>200+ component library with tokens and documentation for enterprise use.</p>
+            <div class="proj-links"><a href="#"><i class="fas fa-external-link-alt"></i> Live</a><a href="#"><i class="fab fa-github"></i> Code</a></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="proj-icon p6"><i class="fas fa-heartbeat"></i></div>
+          <div class="proj-body">
+            <div class="proj-tags"><span>Flutter</span><span>Dart</span></div>
             <h3>Health Tracker</h3>
-            <p>Personal health monitoring app with AI-powered insights, workout plans, and nutrition tracking.</p>
+            <p>Personal health app with AI insights, workout plans, and nutrition tracking.</p>
+            <div class="proj-links"><a href="#"><i class="fas fa-external-link-alt"></i> Live</a><a href="#"><i class="fab fa-github"></i> Code</a></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section class="contact" id="contact">
-    <div class="contact-bg"></div>
+  <!-- CONTACT -->
+  <section id="contact">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Let's Talk</span>
-        <h2 class="section-title">Get In <span class="highlight">Touch</span></h2>
-        <p class="section-sub">Have a project in mind? Let's build something amazing together.</p>
-      </div>
+      <div class="sec-label">Contact</div>
+      <h2>Get In Touch</h2>
       <div class="contact-grid">
-        <div class="contact-left">
-          <div class="contact-info">
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-              <div>
-                <span class="contact-label">Email</span>
-                <span class="contact-value">fadillah@example.com</span>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fas fa-phone"></i></div>
-              <div>
-                <span class="contact-label">Phone</span>
-                <span class="contact-value">+62 xxx-xxxx-xxxx</span>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-              <div>
-                <span class="contact-label">Location</span>
-                <span class="contact-value">Indonesia</span>
-              </div>
-            </div>
-          </div>
-          <div class="social-links">
-            <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-link" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+        <div class="contact-info">
+          <p>Have a project in mind? Let us build something great together.</p>
+          <div class="cinfo-row"><i class="fas fa-envelope"></i><span>fadillah@example.com</span></div>
+          <div class="cinfo-row"><i class="fas fa-map-marker-alt"></i><span>Indonesia</span></div>
+          <div class="socials">
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
-        <div class="contact-right">
-          <form class="contact-form" id="contactForm">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" placeholder="John Doe" required />
-              </div>
-              <div class="form-group">
-                <label for="email">Your Email</label>
-                <input type="email" id="email" placeholder="john@example.com" required />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" placeholder="Project Inquiry" required />
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" rows="5" placeholder="Tell me about your project..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-full">
-              <span>Send Message</span>
-              <i class="fas fa-paper-plane"></i>
-            </button>
-          </form>
-        </div>
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="fg"><label>Name</label><input type="text" placeholder="Your name" required/></div>
+            <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com" required/></div>
+          </div>
+          <div class="fg"><label>Message</label><textarea rows="5" placeholder="Tell me about your project..." required></textarea></div>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
       </div>
     </div>
   </section>
 
-  <!-- Testimonials Section -->
-  <section class="testimonials" id="testimonials">
+  <!-- FOOTER -->
+  <footer>
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Kind Words</span>
-        <h2 class="section-title">What People <span class="highlight">Say</span></h2>
-        <p class="section-sub">Feedback from clients and collaborators I've worked with</p>
-      </div>
-      <div class="testimonials-slider">
-        <div class="testimonial-card active">
-          <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-          <p class="testimonial-text">Fadillah delivered an outstanding web application that exceeded our expectations. His attention to detail and clean code made the entire project a breeze. Highly recommended!</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">AR</div>
-            <div>
-              <span class="author-name">Ahmad Rizky</span>
-              <span class="author-role">CEO, TechStart Indonesia</span>
-            </div>
-            <div class="testimonial-stars">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-          <p class="testimonial-text">Working with Fadillah was a fantastic experience. He understood our vision immediately and translated it into a beautiful, functional product. The UI/UX work was exceptional.</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">SP</div>
-            <div>
-              <span class="author-name">Siti Putri</span>
-              <span class="author-role">Product Manager, DigitalCo</span>
-            </div>
-            <div class="testimonial-stars">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-          <p class="testimonial-text">Fadillah is a rare talent — he combines technical excellence with creative thinking. Our dashboard project was delivered on time, on budget, and looked absolutely stunning.</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">BW</div>
-            <div>
-              <span class="author-name">Budi Wijaya</span>
-              <span class="author-role">CTO, DataViz Labs</span>
-            </div>
-            <div class="testimonial-stars">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="slider-dots">
-        <button class="slider-dot active" aria-label="Slide 1"></button>
-        <button class="slider-dot" aria-label="Slide 2"></button>
-        <button class="slider-dot" aria-label="Slide 3"></button>
-      </div>
+      <span class="logo">FNM</span>
+      <p>Designed &amp; Built by <strong>Fadillah Nurwahid Mursid</strong></p>
+      <p class="copy">&copy; 2026 All rights reserved.</p>
     </div>
-  </section>
-
-  <!-- Back to Top -->
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-logo">FNM</div>
-      <p class="footer-text">Designed & Built by <strong>Fadillah Nurwahid Mursid</strong></p>
-      <p class="footer-copy">© 2026 All rights reserved.</p>
-    </div>
-    <div class="footer-bg-text">FADILLAH</div>
   </footer>
+
+  <button id="toTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
   <script src="script.js"></script>
 </body>
