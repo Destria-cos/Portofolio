@@ -33,19 +33,6 @@ document.querySelectorAll("section, .project-card, .skill-bar-item, .about-info,
   observer.observe(el);
 });
 
-// Skill bar fill animation
-const barObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    entry.target.querySelectorAll(".skill-bar-fill").forEach(fill => {
-      fill.style.width = fill.dataset.width + "%";
-    });
-    barObserver.unobserve(entry.target);
-  });
-}, { threshold: 0.3 });
-const skillsList = document.querySelector(".skills-list");
-if (skillsList) barObserver.observe(skillsList);
-
 // Typing animation
 const roles = ["Full Stack Developer", "Front-End Engineer", "Back-End Developer", "UI/UX Enthusiast"];
 let roleIndex = 0, charIndex = 0, deleting = false;
