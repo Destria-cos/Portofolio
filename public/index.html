@@ -54,20 +54,20 @@
   <div class="stats-bar">
     <div class="container stats-inner">
       <div class="stat-item">
-        <span class="stat-num" data-target="8">0</span>
+        <span class="stat-num" id="stat-certs">0</span>
         <span class="stat-label">Certificates</span>
       </div>
       <div class="stat-item">
-        <span class="stat-num" data-target="5">0</span>
+        <span class="stat-num" id="stat-projects">0</span>
         <span class="stat-label">Projects Built</span>
       </div>
       <div class="stat-item">
-        <span class="stat-num" data-target="3">0</span>
-        <span class="stat-label">Years Learning</span>
+        <span class="stat-num" id="stat-skills">0</span>
+        <span class="stat-label">Skills</span>
       </div>
       <div class="stat-item">
-        <span class="stat-num" data-target="8">0</span>
-        <span class="stat-label">Technologies</span>
+        <span class="stat-num" id="stat-repos">0</span>
+        <span class="stat-label">GitHub Repos</span>
       </div>
     </div>
   </div>
@@ -224,6 +224,8 @@
   </footer>
 
   <button id="toTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+  <!-- cert count kept in sync with Certificates/Dicoding folder -->
+  <span id="cert-count" data-count="8" hidden></span>
   <script src="script.js"></script>
 </body>
 </html>

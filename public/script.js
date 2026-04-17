@@ -57,20 +57,39 @@ function type() {
 }
 type();
 
-// Stats counter
+// Stats counter — reads live from DOM + GitHub API
+function animateCount(el, target) {
+  let count = 0;
+  const step = Math.max(1, Math.ceil(target / 40));
+  const tick = setInterval(() => {
+    count = Math.min(count + step, target);
+    el.textContent = count + "+";
+    if (count >= target) clearInterval(tick);
+  }, 40);
+}
+
 const statsObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
-    entry.target.querySelectorAll(".stat-num").forEach(el => {
-      const target = +el.dataset.target;
-      let count = 0;
-      const step = Math.ceil(target / 40);
-      const tick = setInterval(() => {
-        count = Math.min(count + step, target);
-        el.textContent = count + "+";
-        if (count >= target) clearInterval(tick);
-      }, 40);
-    });
+
+    // Certificates — from hidden data attribute (update data-count when adding certs)
+    const certCount = parseInt(document.getElementById("cert-count")?.dataset.count || "0");
+    // Projects — count actual project cards in the DOM
+    const projectCount = document.querySelectorAll(".project-card").length;
+    // Skills — count actual skill chips in the DOM
+    const skillCount = document.querySelectorAll(".skill-chip").length;
+
+    animateCount(document.getElementById("stat-certs"), certCount);
+    animateCount(document.getElementById("stat-projects"), projectCount);
+    animateCount(document.getElementById("stat-skills"), skillCount);
+
+    // GitHub Repos — live from API
+    const repoEl = document.getElementById("stat-repos");
+    fetch("https://api.github.com/users/Destria-cos")
+      .then(r => r.json())
+      .then(data => animateCount(repoEl, data.public_repos || 0))
+      .catch(() => { repoEl.textContent = "—"; });
+
     statsObserver.unobserve(entry.target);
   });
 }, { threshold: 0.5 });
