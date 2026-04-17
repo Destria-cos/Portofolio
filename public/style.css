@@ -348,8 +348,28 @@ footer strong { color: var(--blue2); }
   transition: all .2s;
 }
 #pdfClose:hover { background: rgba(239,68,68,.1); border-color: #ef4444; color: #ef4444; }
-.pdf-modal-body { flex: 1; overflow: hidden; }
-.pdf-modal-body iframe { width: 100%; height: 100%; display: block; }
+.pdf-modal-body { flex: 1; overflow-y: auto; overflow-x: hidden; background: #1a1a2e; }
+.pdf-canvas-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 1rem;
+}
+.pdf-canvas-wrap canvas {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.4);
+}
+.pdf-loading {
+  color: var(--muted);
+  font-size: .9rem;
+  padding: 3rem;
+  text-align: center;
+}
 
 /* RESPONSIVE EXPLORER */
 @media (max-width: 600px) {

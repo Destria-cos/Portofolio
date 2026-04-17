@@ -220,12 +220,12 @@
       <div class="pdf-modal-header">
         <span id="pdfTitle">Certificate</span>
         <div class="pdf-modal-actions">
-          <a id="pdfDownload" href="#" target="_blank" class="pdf-dl-btn"><i class="fas fa-download"></i> Download</a>
+          <button id="pdfDownload" class="pdf-dl-btn"><i class="fas fa-download"></i> Download</button>
           <button id="pdfClose" aria-label="Close"><i class="fas fa-times"></i></button>
         </div>
       </div>
       <div class="pdf-modal-body">
-        <iframe id="pdfFrame" src="" frameborder="0"></iframe>
+        <div id="pdfCanvas" class="pdf-canvas-wrap"></div>
       </div>
     </div>
   </div>
@@ -275,6 +275,7 @@
   </footer>
 
   <button id="toTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
