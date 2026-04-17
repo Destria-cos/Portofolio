@@ -17,8 +17,8 @@
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
+        <li><a href="#services">Services</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#certificates">Certificates</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="menu-btn" id="menuBtn" aria-label="Menu">
@@ -28,8 +28,8 @@
     <div class="mobile-nav" id="mobileNav">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
+      <a href="#services">Services</a>
       <a href="#projects">Projects</a>
-      <a href="#certificates">Certificates</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
@@ -41,7 +41,7 @@
         <div class="avatar">FNM</div>
       </div>
       <h1>Fadillah <span>Nurwahid Mursid</span></h1>
-      <p class="role">Full Stack Developer</p>
+      <p class="role">I'm a <span id="typed"></span><span class="cursor">|</span></p>
       <p class="desc">Building clean, fast, and meaningful digital experiences from Indonesia.</p>
       <div class="hero-btns">
         <a href="#projects" class="btn-primary">View Work</a>
@@ -49,6 +49,28 @@
       </div>
     </div>
   </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="container stats-inner">
+      <div class="stat-item">
+        <span class="stat-num" data-target="8">0</span>
+        <span class="stat-label">Certificates</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="5">0</span>
+        <span class="stat-label">Projects Built</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="3">0</span>
+        <span class="stat-label">Years Learning</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="8">0</span>
+        <span class="stat-label">Technologies</span>
+      </div>
+    </div>
+  </div>
 
   <!-- ABOUT -->
   <section id="about">
@@ -61,7 +83,9 @@
           <div class="info-row"><i class="fas fa-map-marker-alt"></i><div><small>Location</small><span>Indonesia</span></div></div>
           <div class="info-row"><i class="fas fa-graduation-cap"></i><div><small>Education</small><span>Computer Science</span></div></div>
           <div class="info-row"><i class="fas fa-briefcase"></i><div><small>Status</small><span class="green">Open to Work</span></div></div>
-          <a href="#" class="btn-primary" style="margin-top:1rem;display:inline-flex;gap:.5rem;align-items:center"><i class="fas fa-download"></i> Download CV</a>
+          <a href="mailto:fadilahnurwahid28@gmail.com?subject=CV%20Request%20-%20Fadillah%20Nurwahid%20Mursid&body=Hi%20Fadillah%2C%0A%0AI%20would%20like%20to%20request%20a%20copy%20of%20your%20CV.%0A%0AThank%20you." class="btn-primary" style="margin-top:1rem;display:inline-flex;gap:.5rem;align-items:center">
+            <i class="fas fa-envelope"></i> Request CV
+          </a>
         </div>
         <div class="about-text">
           <p>Hi! I am <strong>Fadillah Nurwahid Mursid</strong>, a dedicated software developer and creative thinker based in Indonesia.</p>
@@ -76,6 +100,7 @@
   <section id="skills">
     <div class="container">
       <div class="sec-label">My Skills</div>
+      <h2>Tech Stack</h2>
       <div class="skills-grid">
         <div class="skill-chip"><i class="fab fa-html5"></i><span>HTML</span></div>
         <div class="skill-chip"><i class="fab fa-css3-alt"></i><span>CSS</span></div>
@@ -85,6 +110,36 @@
         <div class="skill-chip"><i class="fas fa-pen-nib"></i><span>Canva</span></div>
         <div class="skill-chip"><i class="fab fa-node-js"></i><span>Node.JS</span></div>
         <div class="skill-chip"><i class="fab fa-laravel"></i><span>Laravel</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="sec-label">What I Do</div>
+      <h2>Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+          <h3>Web Development</h3>
+          <p>Building responsive, performant websites and web apps using modern HTML, CSS, and JavaScript.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-server"></i></div>
+          <h3>Back-End Development</h3>
+          <p>Designing RESTful APIs and server-side logic with Node.js and Laravel for scalable applications.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fab fa-react"></i></div>
+          <h3>Front-End Engineering</h3>
+          <p>Crafting interactive UIs with React, focusing on clean component architecture and great UX.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+          <h3>UI / UX Design</h3>
+          <p>Designing clean, user-friendly interfaces in Figma and Canva before bringing them to life in code.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -137,108 +192,15 @@
     </div>
   </section>
 
-  <!-- CERTIFICATES -->
-  <section id="certificates">
-    <div class="container">
-      <div class="sec-label">Certificates</div>
-      <h2>My Certificates</h2>
-
-      <!-- File Explorer -->
-      <div class="explorer">
-        <div class="explorer-header">
-          <span class="col-name">Name</span>
-          <span class="col-date">Date</span>
-          <span class="col-type">Type</span>
-          <span class="col-action"></span>
-        </div>
-        <div class="explorer-body">
-
-          <div class="explorer-row" data-pdf="https://raw.githubusercontent.com/Destria-cos/Portofolio/main/Certificates/Dicoding/Belajar%20Back-End%20Pemula%20dengan%20JavaScript.pdf">
-            <span class="col-name"><i class="fas fa-file-pdf"></i>Belajar Back-End Pemula dengan JavaScript</span>
-            <span class="col-date">27 Feb 2026</span>
-            <span class="col-type">PDF Document</span>
-            <span class="col-action"><button class="view-btn">View <i class="fas fa-eye"></i></button></span>
-          </div>
-
-          <div class="explorer-row" data-pdf="https://raw.githubusercontent.com/Destria-cos/Portofolio/main/Certificates/Dicoding/Belajar%20Dasar%20Cloud%20dan%20Gen%20AI%20di%20AWS.pdf">
-            <span class="col-name"><i class="fas fa-file-pdf"></i>Belajar Dasar Cloud dan Gen AI di AWS</span>
-            <span class="col-date">25 Feb 2026</span>
-            <span class="col-type">PDF Document</span>
-            <span class="col-action"><button class="view-btn">View <i class="fas fa-eye"></i></button></span>
-          </div>
-
-          <div class="explorer-row" data-pdf="https://raw.githubusercontent.com/Destria-cos/Portofolio/main/Certificates/Dicoding/Belajar%20Dasar%20Pemrograman%20JavaScript.pdf">
-            <span class="col-name"><i class="fas fa-file-pdf"></i>Belajar Dasar Pemrograman JavaScript</span>
-            <span class="col-date">25 Feb 2026</span>
-            <span class="col-type">PDF Document</span>
-            <span class="col-action"><button class="view-btn">View <i class="fas fa-eye"></i></button></span>
-          </div>
-
-          <div class="explorer-row" data-pdf="https://raw.githubusercontent.com/Destria-cos/Portofolio/main/Certificates/Dicoding/Belajar%20Dasar%20Pemrograman%20Web.pdf">
-            <span class="col-name"><i class="fas fa-file-pdf"></i>Belajar Dasar Pemrograman Web</span>
-            <span class="col-date">25 Feb 2026</span>
-            <span class="col-type">PDF Document</span>
-            <span class="col-action"><button class="view-btn">View <i class="fas fa-eye"></i></button></span>
-          </div>
-
-          <div class="explorer-row" data-pdf="https://raw.githubusercontent.com/Destria-cos/Portofolio/main/Certificates/Dicoding/Belajar%20Membuat%20Aplikasi%20Web%20dengan%20React.pdf">
-            <span class="col-name"><i class="fas fa-file-pdf"></i>Belajar Membuat Aplikasi Web dengan React</span>
-            <span class="col-date">25 Feb 2026</span>
-            <span class="col-type">PDF Document</span>
-            <span class="col-action"><button class="view-btn">View <i class="fas fa-eye"></i></button></span>
-          </div>
-
-          <div class="explorer-row" data-pdf="https://raw.githubusercontent.com/Destria-cos/Portofolio/main/Certificates/Dicoding/Belajar%20Membuat%20Front-End%20Web%20untuk%20Pemula.pdf">
-            <span class="col-name"><i class="fas fa-file-pdf"></i>Belajar Membuat Front-End Web untuk Pemula</span>
-            <span class="col-date">25 Feb 2026</span>
-            <span class="col-type">PDF Document</span>
-            <span class="col-action"><button class="view-btn">View <i class="fas fa-eye"></i></button></span>
-          </div>
-
-          <div class="explorer-row" data-pdf="https://raw.githubusercontent.com/Destria-cos/Portofolio/main/Certificates/Dicoding/Memulai%20Dasar%20Pemrograman%20untuk%20Menjadi%20Pengembang.pdf">
-            <span class="col-name"><i class="fas fa-file-pdf"></i>Memulai Dasar Pemrograman untuk Menjadi Pengembang</span>
-            <span class="col-date">25 Feb 2026</span>
-            <span class="col-type">PDF Document</span>
-            <span class="col-action"><button class="view-btn">View <i class="fas fa-eye"></i></button></span>
-          </div>
-
-          <div class="explorer-row" data-pdf="https://raw.githubusercontent.com/Destria-cos/Portofolio/main/Certificates/Dicoding/Pengenalan%20ke%20Logika%20Pemrograman%20(Programming%20Logic%20101).pdf">
-            <span class="col-name"><i class="fas fa-file-pdf"></i>Pengenalan ke Logika Pemrograman (Programming Logic 101)</span>
-            <span class="col-date">25 Feb 2026</span>
-            <span class="col-type">PDF Document</span>
-            <span class="col-action"><button class="view-btn">View <i class="fas fa-eye"></i></button></span>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PDF MODAL -->
-  <div class="pdf-modal" id="pdfModal">
-    <div class="pdf-modal-inner">
-      <div class="pdf-modal-header">
-        <span id="pdfTitle">Certificate</span>
-        <div class="pdf-modal-actions">
-          <button id="pdfDownload" class="pdf-dl-btn"><i class="fas fa-download"></i> Download</button>
-          <button id="pdfClose" aria-label="Close"><i class="fas fa-times"></i></button>
-        </div>
-      </div>
-      <div class="pdf-modal-body">
-        <div id="pdfCanvas" class="pdf-canvas-wrap"></div>
-      </div>
-    </div>
-  </div>
-
   <!-- CONTACT -->
   <section id="contact">
     <div class="container">
       <div class="sec-label">Contact</div>
       <h2>Get In Touch</h2>
       <div class="contact-wrap">
-        <p class="contact-sub">Have a project in mind? Reach me directly via email or social media.</p>
+        <p class="contact-sub">Have a project in mind or want to work together? Reach me directly via email or social media.</p>
 
-        <a href="mailto:fadillah@example.com" class="email-link">
+        <a href="mailto:fadilahnurwahid28@gmail.com" class="email-link">
           <i class="fas fa-envelope"></i>
           fadilahnurwahid28@gmail.com
         </a>
@@ -275,7 +237,6 @@
   </footer>
 
   <button id="toTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
