@@ -28,10 +28,23 @@ const observer = new IntersectionObserver((entries) => {
     observer.unobserve(entry.target);
   });
 }, { threshold: 0.12 });
-document.querySelectorAll("section, .project-card, .skill-chip, .about-info, .about-text, .service-card").forEach(el => {
+document.querySelectorAll("section, .project-card, .skill-bar-item, .about-info, .about-text, .service-card").forEach(el => {
   el.classList.add("reveal");
   observer.observe(el);
 });
+
+// Skill bar fill animation
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.querySelectorAll(".skill-bar-fill").forEach(fill => {
+      fill.style.width = fill.dataset.width + "%";
+    });
+    barObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.3 });
+const skillsList = document.querySelector(".skills-list");
+if (skillsList) barObserver.observe(skillsList);
 
 // Typing animation
 const roles = ["Full Stack Developer", "Front-End Engineer", "Back-End Developer", "UI/UX Enthusiast"];

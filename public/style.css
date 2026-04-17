@@ -131,16 +131,50 @@ h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 2rem;
 
 /* SKILLS */
 #skills { background: var(--bg2); }
-.skills-grid { display: flex; flex-wrap: wrap; gap: .75rem; }
-.skill-chip {
-  display: flex; align-items: center; gap: .6rem;
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 10px; padding: .7rem 1.2rem;
-  font-size: .875rem; font-weight: 600; color: var(--text);
-  transition: border-color .2s, color .2s;
+.skills-list { display: flex; flex-direction: column; gap: .75rem; }
+.skill-bar-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem 1.3rem;
+  transition: border-color .2s;
 }
-.skill-chip:hover { border-color: var(--blue); color: var(--blue2); }
-.skill-chip i { color: var(--blue); font-size: 1.1rem; }
+.skill-bar-item:hover { border-color: var(--blue); }
+.skill-bar-icon {
+  width: 42px; height: 42px; flex-shrink: 0;
+  border-radius: 10px;
+  background: rgba(59,130,246,.1);
+  border: 1px solid rgba(59,130,246,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem; color: var(--blue2);
+  margin-top: .1rem;
+}
+.skill-bar-body { flex: 1; min-width: 0; }
+.skill-bar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: .15rem;
+}
+.skill-bar-name { font-size: .9rem; font-weight: 700; color: var(--text); }
+.skill-bar-pct { font-size: .75rem; font-weight: 600; color: var(--blue2); }
+.skill-bar-desc { font-size: .78rem; color: var(--muted); margin-bottom: .6rem; }
+.skill-bar-track {
+  width: 100%; height: 5px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.skill-bar-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--blue3), var(--blue2));
+  transition: width .9s cubic-bezier(.4,0,.2,1);
+}
 
 /* SERVICES */
 #services { background: var(--bg); }
