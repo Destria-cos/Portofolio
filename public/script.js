@@ -28,8 +28,37 @@ const observer = new IntersectionObserver((entries) => {
     observer.unobserve(entry.target);
   });
 }, { threshold: 0.12 });
-
 document.querySelectorAll("section, .project-card, .skill-chip, .about-info, .about-text").forEach(el => {
   el.classList.add("reveal");
   observer.observe(el);
 });
+
+// PDF Modal
+const modal = document.getElementById("pdfModal");
+const pdfFrame = document.getElementById("pdfFrame");
+const pdfTitle = document.getElementById("pdfTitle");
+const pdfDownload = document.getElementById("pdfDownload");
+const pdfClose = document.getElementById("pdfClose");
+
+document.querySelectorAll(".view-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const row = btn.closest(".explorer-row");
+    const pdf = row.dataset.pdf;
+    const name = row.querySelector(".col-name").textContent.trim();
+    pdfTitle.textContent = name;
+    pdfFrame.src = pdf;
+    pdfDownload.href = pdf;
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  });
+});
+
+pdfClose.addEventListener("click", closeModal);
+modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+function closeModal() {
+  modal.classList.remove("open");
+  pdfFrame.src = "";
+  document.body.style.overflow = "";
+}
