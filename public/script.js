@@ -72,18 +72,21 @@ const statsObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
 
-    // Years of Learning — since 2023
-    const yearsLearning = new Date().getFullYear() - 2023 || 1;
-    // Projects — count actual project cards in the DOM
+    // Years of Learning - starts from 2023, auto-updates each new year
+    const currentYear = new Date().getFullYear();
+    const yearsLearning = currentYear > 2023 ? currentYear - 2023 : 1;
+    const yearsEl = document.getElementById("stat-years");
+    animateCount(yearsEl, yearsLearning);
+
+    // Projects - count actual project cards in the DOM
     const projectCount = document.querySelectorAll(".project-card").length;
-    // Skills — count actual skill chips in the DOM
+    // Skills - count actual skill chips in the DOM
     const skillCount = document.querySelectorAll(".skill-chip").length;
 
-    animateCount(document.getElementById("stat-years"), yearsLearning);
     animateCount(document.getElementById("stat-projects"), projectCount);
     animateCount(document.getElementById("stat-skills"), skillCount);
 
-    // GitHub Repos — live from API
+    // GitHub Repos - live from API
     const repoEl = document.getElementById("stat-repos");
     fetch("https://api.github.com/users/Destria-cos")
       .then(r => r.json())
