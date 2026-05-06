@@ -72,14 +72,14 @@ const statsObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
 
-    // Certificates — from hidden data attribute (update data-count when adding certs)
-    const certCount = parseInt(document.getElementById("cert-count")?.dataset.count || "0");
+    // Years of Learning — since 2023
+    const yearsLearning = new Date().getFullYear() - 2023 || 1;
     // Projects — count actual project cards in the DOM
     const projectCount = document.querySelectorAll(".project-card").length;
     // Skills — count actual skill chips in the DOM
     const skillCount = document.querySelectorAll(".skill-chip").length;
 
-    animateCount(document.getElementById("stat-certs"), certCount);
+    animateCount(document.getElementById("stat-years"), yearsLearning);
     animateCount(document.getElementById("stat-projects"), projectCount);
     animateCount(document.getElementById("stat-skills"), skillCount);
 
