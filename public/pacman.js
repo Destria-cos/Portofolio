@@ -1,14 +1,20 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const scoreEl = document.getElementById("score");
+const heartsEl = document.getElementById("hearts");
+const startScreen = document.getElementById("startScreen");
 const winModal = document.getElementById("winModal");
+const loseModal = document.getElementById("loseModal");
+const startBtn = document.getElementById("startBtn");
 const restartBtn = document.getElementById("restartBtn");
+const retryBtn = document.getElementById("retryBtn");
 
 let score = 0;
-let gameOver = false;
-let gameWon = false;
+let lives = 3;
+let gameState = 'MENU'; // MENU, PLAYING, WON, GAME_OVER
 
 // Basic maze (1 = wall, 0 = pellet, 2 = empty, 3 = pacman start, 4 = ghost start)
+// Row 9 is the tunnel row, so ends are open
 const map = [
   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
   [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1],
@@ -19,9 +25,9 @@ const map = [
   [1,1,1,1,0,1,1,1,2,1,2,1,1,1,0,1,1,1,1],
   [2,2,2,1,0,1,2,2,2,4,2,2,2,1,0,1,2,2,2],
   [1,1,1,1,0,1,2,1,1,2,1,1,2,1,0,1,1,1,1],
-  [2,2,2,2,0,2,2,1,4,4,4,1,2,2,0,2,2,2,2],
+  [2,2,2,2,0,2,2,1,4,4,4,1,2,2,0,2,2,2,2], // row 9: tunnel
   [1,1,1,1,0,1,2,1,1,1,1,1,2,1,0,1,1,1,1],
-  [2,2,2,1,0,1,2,2,2,3,2,2,2,1,0,1,2,2,2],
+  [2,2,2,1,0,1,2,2,2,3,2,2,2,1,0,1,2,2,2], // pacman start at (9, 11)
   [1,1,1,1,0,1,2,1,1,1,1,1,2,1,0,1,1,1,1],
   [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1],
   [1,0,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,0,1],
@@ -38,11 +44,7 @@ let ROWS = map.length;
 function resizeCanvas() {
   const wrapper = document.querySelector('.canvas-wrapper');
   const maxWidth = wrapper.clientWidth;
-  
-  // Calculate tile size to fit within max width while keeping aspect ratio
-  // Base tile size is 24, but scale down if needed
   TILE_SIZE = Math.min(24, Math.floor(maxWidth / COLS));
-  
   canvas.width = COLS * TILE_SIZE;
   canvas.height = ROWS * TILE_SIZE;
 }
@@ -54,16 +56,48 @@ let ghosts = [];
 let pellets = 0;
 let gameMap = [];
 
+function updateHearts() {
+  let html = '';
+  for(let i=0; i<3; i++) {
+    html += `<i class="fas fa-heart ${i >= lives ? 'empty' : ''}"></i>`;
+  }
+  heartsEl.innerHTML = html;
+}
+
+function resetPositions() {
+  pacman.x = 9; pacman.y = 11;
+  pacman.px = 9; pacman.py = 11;
+  pacman.vx = 0; pacman.vy = 0;
+  nextVx = 0; nextVy = 0;
+  
+  // reset ghosts
+  let gIdx = 0;
+  for(let r=0; r<ROWS; r++){
+    for(let c=0; c<COLS; c++){
+      if (map[r][c] === 4 && gIdx < ghosts.length) {
+        ghosts[gIdx].x = c; ghosts[gIdx].y = r;
+        ghosts[gIdx].px = c; ghosts[gIdx].py = r;
+        ghosts[gIdx].vx = 1; ghosts[gIdx].vy = 0;
+        gIdx++;
+      }
+    }
+  }
+}
+
 function initGame() {
   resizeCanvas();
   gameMap = [];
   ghosts = [];
   pellets = 0;
   score = 0;
-  gameOver = false;
-  gameWon = false;
+  lives = 3;
+  gameState = 'PLAYING';
+  
   scoreEl.innerText = score;
+  updateHearts();
+  startScreen.classList.remove('show');
   winModal.classList.remove('show');
+  loseModal.classList.remove('show');
   
   for(let r=0; r<ROWS; r++){
     gameMap[r] = [];
@@ -90,6 +124,7 @@ let nextVx = 0;
 let nextVy = 0;
 
 function setDirection(dx, dy) {
+  if (gameState !== 'PLAYING') return;
   nextVx = dx; nextVy = dy;
 }
 
@@ -106,19 +141,42 @@ document.getElementById('btnUp')?.addEventListener('touchstart', (e) => { e.prev
 document.getElementById('btnDown')?.addEventListener('touchstart', (e) => { e.preventDefault(); setDirection(0, 1); });
 document.getElementById('btnLeft')?.addEventListener('touchstart', (e) => { e.preventDefault(); setDirection(-1, 0); });
 document.getElementById('btnRight')?.addEventListener('touchstart', (e) => { e.preventDefault(); setDirection(1, 0); });
-// Add mouse support for D-pad testing on desktop
 document.getElementById('btnUp')?.addEventListener('mousedown', () => setDirection(0, -1));
 document.getElementById('btnDown')?.addEventListener('mousedown', () => setDirection(0, 1));
 document.getElementById('btnLeft')?.addEventListener('mousedown', () => setDirection(-1, 0));
 document.getElementById('btnRight')?.addEventListener('mousedown', () => setDirection(1, 0));
 
-restartBtn.addEventListener('click', () => {
-  initGame();
-});
+startBtn.addEventListener('click', initGame);
+restartBtn.addEventListener('click', initGame);
+retryBtn.addEventListener('click', initGame);
 
 function isWall(x, y) {
-  if (x < 0 || x >= COLS || y < 0 || y >= ROWS) return true;
+  // Allow tunnel pass-through
+  if (x < 0 || x >= COLS) return false; 
+  if (y < 0 || y >= ROWS) return true;
   return gameMap[y][x] === 1;
+}
+
+function getLineOfSight(ghost) {
+  if (ghost.y === pacman.y) {
+    let minX = Math.min(ghost.x, pacman.x);
+    let maxX = Math.max(ghost.x, pacman.x);
+    let clear = true;
+    for(let x = minX; x <= maxX; x++) {
+      if (isWall(x, ghost.y)) { clear = false; break; }
+    }
+    if (clear) return { vx: Math.sign(pacman.x - ghost.x), vy: 0 };
+  }
+  if (ghost.x === pacman.x) {
+    let minY = Math.min(ghost.y, pacman.y);
+    let maxY = Math.max(ghost.y, pacman.y);
+    let clear = true;
+    for(let y = minY; y <= maxY; y++) {
+      if (isWall(ghost.x, y)) { clear = false; break; }
+    }
+    if (clear) return { vx: 0, vy: Math.sign(pacman.y - ghost.y) };
+  }
+  return null;
 }
 
 function updateEntity(ent, isPacman) {
@@ -137,30 +195,44 @@ function updateEntity(ent, isPacman) {
       }
       
       // Collect pellet
-      if (gameMap[ent.y][ent.x] === 0) {
+      if (gameMap[ent.y] && gameMap[ent.y][ent.x] === 0) {
         gameMap[ent.y][ent.x] = 2; // set to empty
         score += 10;
         scoreEl.innerText = score;
         pellets--;
         if (pellets === 0) {
-          gameWon = true;
+          gameState = 'WON';
           winModal.classList.add('show');
         }
       }
     } else {
-      // Ghost AI: Random movement if at intersection or wall
+      // Ghost AI: Check Line of Sight
+      let los = getLineOfSight(ent);
+      let chase = false;
+      
       let options = [];
       if (!isWall(ent.x+1, ent.y) && !(ent.vx===-1 && ent.vy===0)) options.push({vx:1, vy:0});
       if (!isWall(ent.x-1, ent.y) && !(ent.vx===1 && ent.vy===0)) options.push({vx:-1, vy:0});
       if (!isWall(ent.x, ent.y+1) && !(ent.vx===0 && ent.vy===-1)) options.push({vx:0, vy:1});
       if (!isWall(ent.x, ent.y-1) && !(ent.vx===0 && ent.vy===1)) options.push({vx:0, vy:-1});
       
-      if (options.length === 0) { // Dead end
-        ent.vx *= -1; ent.vy *= -1;
-      } else if (isWall(ent.x + ent.vx, ent.y + ent.vy) || Math.random() < 0.2) {
-        // Change direction if hitting wall or randomly at intersection
-        let opt = options[Math.floor(Math.random() * options.length)];
-        ent.vx = opt.vx; ent.vy = opt.vy;
+      if (los) {
+        // Only chase if the LOS direction is a valid move (not turning 180 directly unless dead end)
+        let isValid = options.find(o => o.vx === los.vx && o.vy === los.vy);
+        if (isValid) {
+          ent.vx = los.vx; ent.vy = los.vy;
+          chase = true;
+        }
+      }
+      
+      if (!chase) {
+        if (options.length === 0) { // Dead end
+          ent.vx *= -1; ent.vy *= -1;
+        } else if (isWall(ent.x + ent.vx, ent.y + ent.vy) || Math.random() < 0.25) {
+          // Change direction if hitting wall or randomly at intersection
+          let opt = options[Math.floor(Math.random() * options.length)];
+          ent.vx = opt.vx; ent.vy = opt.vy;
+        }
       }
     }
   }
@@ -169,13 +241,17 @@ function updateEntity(ent, isPacman) {
   ent.px += ent.vx * ent.speed;
   ent.py += ent.vy * ent.speed;
   
+  // Wrap around tunnel
+  if (ent.px < -0.5) { ent.px = COLS - 0.5; }
+  if (ent.px > COLS - 0.5) { ent.px = -0.5; }
+  
   // Update logical grid position
   ent.x = Math.round(ent.px);
   ent.y = Math.round(ent.py);
 
-  // Wrap around tunnel
-  if (ent.x < 0) { ent.px = COLS-1; ent.x = COLS-1; }
-  if (ent.x >= COLS) { ent.px = 0; ent.x = 0; }
+  // Wrap around logical
+  if (ent.x < 0) ent.x = COLS - 1;
+  if (ent.x >= COLS) ent.x = 0;
   
   if (isPacman) {
     if (ent.vx === 1) ent.angle = 0;
@@ -190,11 +266,11 @@ function drawMap() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   
   for(let r=0; r<ROWS; r++){
+    if(!gameMap[r]) continue;
     for(let c=0; c<COLS; c++){
       if (gameMap[r][c] === 1) {
         ctx.fillStyle = "#1e2d4a"; // var(--border)
         ctx.fillRect(c*TILE_SIZE, r*TILE_SIZE, TILE_SIZE, TILE_SIZE);
-        // Inner border for cool look
         ctx.strokeStyle = "#3b82f6"; // var(--blue)
         ctx.lineWidth = 1.5;
         ctx.strokeRect(c*TILE_SIZE+2, r*TILE_SIZE+2, TILE_SIZE-4, TILE_SIZE-4);
@@ -212,8 +288,11 @@ let mouthOpen = 0;
 let mouthDir = 1;
 
 function drawPacman() {
-  mouthOpen += 0.1 * mouthDir;
-  if (mouthOpen >= 0.5 || mouthOpen <= 0) mouthDir *= -1;
+  // If in menu, don't animate mouth
+  if (gameState === 'PLAYING') {
+    mouthOpen += 0.1 * mouthDir;
+    if (mouthOpen >= 0.5 || mouthOpen <= 0) mouthDir *= -1;
+  }
   
   ctx.save();
   ctx.translate(pacman.px * TILE_SIZE + TILE_SIZE/2, pacman.py * TILE_SIZE + TILE_SIZE/2);
@@ -237,23 +316,19 @@ function drawGhosts() {
     let cy = g.py * TILE_SIZE + TILE_SIZE/2;
     let r = TILE_SIZE/2 - 2;
     
-    // Ghost body
     ctx.arc(cx, cy, r, Math.PI, 0);
     ctx.lineTo(cx + r, cy + r);
     
-    // Squiggly bottom
     ctx.lineTo(cx + r/3, cy + r - 3);
     ctx.lineTo(cx - r/3, cy + r);
     ctx.lineTo(cx - r, cy + r - 3);
     ctx.closePath();
     ctx.fill();
     
-    // Eyes
     ctx.fillStyle = "white";
     ctx.beginPath(); ctx.arc(cx - r/2.5, cy - r/4, r/3, 0, Math.PI*2); ctx.fill();
     ctx.beginPath(); ctx.arc(cx + r/2.5, cy - r/4, r/3, 0, Math.PI*2); ctx.fill();
     
-    // Pupils
     ctx.fillStyle = "blue";
     ctx.beginPath(); ctx.arc(cx - r/2.5 + g.vx*2, cy - r/4 + g.vy*2, r/6, 0, Math.PI*2); ctx.fill();
     ctx.beginPath(); ctx.arc(cx + r/2.5 + g.vx*2, cy - r/4 + g.vy*2, r/6, 0, Math.PI*2); ctx.fill();
@@ -262,33 +337,54 @@ function drawGhosts() {
 
 function checkCollision() {
   ghosts.forEach(g => {
+    // If distance is small enough
     let dx = pacman.px - g.px;
     let dy = pacman.py - g.py;
+    // Handle tunnel wrapping distance
+    if (Math.abs(dx) > COLS/2) dx = COLS - Math.abs(dx);
+    
     if (Math.sqrt(dx*dx + dy*dy) < 0.8) {
-      // Pacman dies (simplification: just reset pacman position to start)
-      pacman.px = 9; pacman.py = 11; pacman.x = 9; pacman.y = 11;
-      pacman.vx = 0; pacman.vy = 0;
-      nextVx = 0; nextVy = 0;
-      // Lose points
-      score = Math.max(0, score - 50);
-      scoreEl.innerText = score;
+      lives--;
+      updateHearts();
+      if (lives > 0) {
+        resetPositions();
+      } else {
+        gameState = 'GAME_OVER';
+        loseModal.classList.add('show');
+      }
     }
   });
 }
 
 function loop() {
-  if (!gameWon && !gameOver) {
+  if (gameState === 'PLAYING') {
     updateEntity(pacman, true);
     ghosts.forEach(g => updateEntity(g, false));
     checkCollision();
   }
   
-  drawMap();
-  drawPacman();
-  drawGhosts();
+  // We still draw if MENU, WON, or GAME_OVER to keep background
+  if (gameMap.length > 0) {
+    drawMap();
+    drawPacman();
+    drawGhosts();
+  }
   
   requestAnimationFrame(loop);
 }
 
-initGame();
+// Prepare background for menu
+for(let r=0; r<ROWS; r++){
+  gameMap[r] = [];
+  for(let c=0; c<COLS; c++){
+    gameMap[r][c] = map[r][c];
+  }
+}
+pacman.x = 9; pacman.y = 11; pacman.px = 9; pacman.py = 11;
+ghosts.push({x: 9, y: 7, px: 9, py: 7, vx: 1, vy: 0, speed: 0.08, color: '#ff0000'});
+ghosts.push({x: 8, y: 9, px: 8, py: 9, vx: -1, vy: 0, speed: 0.08, color: '#ffb8ff'});
+ghosts.push({x: 10, y: 9, px: 10, py: 9, vx: 1, vy: 0, speed: 0.08, color: '#00ffff'});
+
+resizeCanvas();
+updateHearts();
 requestAnimationFrame(loop);

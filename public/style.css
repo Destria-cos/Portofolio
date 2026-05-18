@@ -265,6 +265,9 @@ footer strong { color: var(--blue2); }
 .game-header { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 1rem; }
 .game-header h2 { margin-bottom: 0; font-size: 1.5rem; }
 .game-header h2 span { color: var(--blue2); }
+.game-stats { display: flex; align-items: center; gap: 1rem; }
+.hearts { display: flex; gap: .3rem; color: #ef4444; font-size: 1.2rem; }
+.hearts .empty { color: var(--border); }
 .score-board { font-size: 1.25rem; font-weight: 700; color: var(--blue2); background: var(--card); padding: .5rem 1rem; border-radius: 8px; border: 1px solid var(--border); }
 .canvas-wrapper { position: relative; width: 100%; display: flex; justify-content: center; background: var(--bg2); border: 2px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 #gameCanvas { display: block; max-width: 100%; height: auto; }

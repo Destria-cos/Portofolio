@@ -41,11 +41,27 @@
     <div class="container game-container">
       <div class="game-header">
         <h2>Pacman <span>Mini-Game</span></h2>
-        <div class="score-board">Score: <span id="score">0</span></div>
+        <div class="game-stats">
+          <div class="hearts" id="hearts">
+            <!-- Hearts will be injected here -->
+          </div>
+          <div class="score-board">Score: <span id="score">0</span></div>
+        </div>
       </div>
       
       <div class="canvas-wrapper">
         <canvas id="gameCanvas"></canvas>
+        
+        <!-- START SCREEN -->
+        <div id="startScreen" class="modal show">
+          <div class="modal-content">
+            <h3 style="color:var(--blue2)">Pacman</h3>
+            <p>Ready to play?</p>
+            <button id="startBtn" class="btn-primary"><i class="fas fa-play"></i> Play Game</button>
+          </div>
+        </div>
+
+        <!-- WIN MODAL -->
         <div id="winModal" class="modal">
           <div class="modal-content">
             <div class="trophy-wrap">
@@ -54,6 +70,18 @@
             <h3>You Win!</h3>
             <p>Congratulations! You collected all the pellets.</p>
             <button id="restartBtn" class="btn-primary">Play Again</button>
+          </div>
+        </div>
+
+        <!-- GAME OVER MODAL -->
+        <div id="loseModal" class="modal">
+          <div class="modal-content">
+            <div class="trophy-wrap" style="background:rgba(239,68,68,0.15); border-color:rgba(239,68,68,0.3)">
+              <i class="fas fa-skull trophy-icon" style="color:#ef4444; filter:drop-shadow(0 0 10px rgba(239,68,68,0.6))"></i>
+            </div>
+            <h3>Game Over!</h3>
+            <p>You were caught by the ghosts.</p>
+            <button id="retryBtn" class="btn-primary">Try Again</button>
           </div>
         </div>
       </div>
