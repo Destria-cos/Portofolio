@@ -1,6 +1,7 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const scoreEl = document.getElementById("score");
+const highScoreEl = document.getElementById("highScore");
 const heartsEl = document.getElementById("hearts");
 const startScreen = document.getElementById("startScreen");
 const winModal = document.getElementById("winModal");
@@ -10,6 +11,7 @@ const restartBtn = document.getElementById("restartBtn");
 const retryBtn = document.getElementById("retryBtn");
 
 let score = 0;
+let highScore = localStorage.getItem('pacmanHighScore') || 0;
 let lives = 3;
 let gameState = 'MENU'; // MENU, PLAYING, WON, GAME_OVER
 
@@ -93,6 +95,7 @@ function initGame() {
   lives = 3;
   gameState = 'PLAYING';
   
+  highScoreEl.innerText = highScore;
   scoreEl.innerText = score;
   updateHearts();
   startScreen.classList.remove('show');
@@ -199,6 +202,11 @@ function updateEntity(ent, isPacman) {
         gameMap[ent.y][ent.x] = 2; // set to empty
         score += 10;
         scoreEl.innerText = score;
+        if (score > highScore) {
+          highScore = score;
+          highScoreEl.innerText = highScore;
+          localStorage.setItem('pacmanHighScore', highScore);
+        }
         pellets--;
         if (pellets === 0) {
           gameState = 'WON';
@@ -387,4 +395,5 @@ ghosts.push({x: 10, y: 9, px: 10, py: 9, vx: 1, vy: 0, speed: 0.08, color: '#00f
 
 resizeCanvas();
 updateHearts();
+highScoreEl.innerText = highScore;
 requestAnimationFrame(loop);
