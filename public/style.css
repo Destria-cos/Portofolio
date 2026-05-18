@@ -71,10 +71,8 @@ h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 2rem;
 .hero-center { text-align: center; display: flex; flex-direction: column; align-items: center; gap: .75rem; }
 .avatar-wrap { margin-bottom: .5rem; }
 .avatar {
-  width: 100px; height: 100px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--blue3), var(--blue2));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.5rem; font-weight: 800; color: #fff;
+  width: 120px; height: 120px; border-radius: 50%;
+  object-fit: cover;
   box-shadow: 0 0 30px rgba(59,130,246,.25);
   margin: 0 auto;
 }
@@ -202,8 +200,6 @@ h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 2rem;
 .proj-url { font-size: .75rem; color: var(--blue2); }
 .proj-body p { font-size: .825rem; color: var(--muted); flex: 1; }
 .proj-visit { font-size: .8rem; color: var(--blue2); font-weight: 600; display: flex; align-items: center; gap: .4rem; margin-top: .5rem; }
-.proj-hint { font-size: .78rem; color: var(--muted); display: flex; align-items: center; gap: .4rem; }
-.proj-hint i { color: var(--blue); }
 
 /* CONTACT */
 #contact { background: var(--bg); }
