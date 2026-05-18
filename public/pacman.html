@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Play Pacman - Fadillah Nurwahid Mursid</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="pacman-page">
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html#hero" class="logo"><img src="image/Fadillah profile.png" alt="Fadillah Nurwahid Mursid" style="width:38px;height:38px;border-radius:50%;object-fit:cover;vertical-align:middle;"/></a>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="pacman.html" class="nav-play-btn active" style="color:var(--blue2)"><i class="fas fa-gamepad"></i> Pacman</a></li>
+      </ul>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="index.html#about">About</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="pacman.html" class="nav-play-btn active" style="color:var(--blue2)"><i class="fas fa-gamepad"></i> Pacman</a>
+    </div>
+  </nav>
+
+  <!-- GAME SECTION -->
+  <section id="game-section">
+    <div class="container game-container">
+      <div class="game-header">
+        <h2>Pacman <span>Mini-Game</span></h2>
+        <div class="score-board">Score: <span id="score">0</span></div>
+      </div>
+      
+      <div class="canvas-wrapper">
+        <canvas id="gameCanvas"></canvas>
+        <div id="winModal" class="modal">
+          <div class="modal-content">
+            <div class="trophy-wrap">
+              <i class="fas fa-trophy trophy-icon"></i>
+            </div>
+            <h3>You Win!</h3>
+            <p>Congratulations! You collected all the pellets.</p>
+            <button id="restartBtn" class="btn-primary">Play Again</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Controls -->
+      <div class="d-pad" id="dPad">
+        <div class="d-row">
+          <button class="d-btn up" id="btnUp"><i class="fas fa-chevron-up"></i></button>
+        </div>
+        <div class="d-row">
+          <button class="d-btn left" id="btnLeft"><i class="fas fa-chevron-left"></i></button>
+          <button class="d-btn down" id="btnDown"><i class="fas fa-chevron-down"></i></button>
+          <button class="d-btn right" id="btnRight"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>Designed &amp; Built by <strong>Fadillah Nurwahid Mursid</strong></p>
+      <p class="copy">&copy; 2026 All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="pacman.js"></script>
+</body>
+</html>

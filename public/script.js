@@ -2,23 +2,27 @@ const nav = document.getElementById("nav");
 const toTop = document.getElementById("toTop");
 
 window.addEventListener("scroll", () => {
-  nav.classList.toggle("scrolled", window.scrollY > 10);
-  toTop.classList.toggle("show", window.scrollY > 400);
+  if (nav) nav.classList.toggle("scrolled", window.scrollY > 10);
+  if (toTop) toTop.classList.toggle("show", window.scrollY > 400);
 }, { passive: true });
 
-toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+if (toTop) {
+  toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+}
 
 // Mobile menu
 const menuBtn = document.getElementById("menuBtn");
 const mobileNav = document.getElementById("mobileNav");
-menuBtn.addEventListener("click", () => {
-  const open = mobileNav.classList.toggle("open");
-  menuBtn.innerHTML = open ? "<i class=\"fas fa-times\"></i>" : "<i class=\"fas fa-bars\"></i>";
-});
-mobileNav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
-  mobileNav.classList.remove("open");
-  menuBtn.innerHTML = "<i class=\"fas fa-bars\"></i>";
-}));
+if (menuBtn && mobileNav) {
+  menuBtn.addEventListener("click", () => {
+    const open = mobileNav.classList.toggle("open");
+    menuBtn.innerHTML = open ? "<i class=\"fas fa-times\"></i>" : "<i class=\"fas fa-bars\"></i>";
+  });
+  mobileNav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+    mobileNav.classList.remove("open");
+    menuBtn.innerHTML = "<i class=\"fas fa-bars\"></i>";
+  }));
+}
 
 // Scroll reveal
 const observer = new IntersectionObserver((entries) => {
@@ -39,6 +43,7 @@ let roleIndex = 0, charIndex = 0, deleting = false;
 const typedEl = document.getElementById("typed");
 
 function type() {
+  if (!typedEl) return;
   const current = roles[roleIndex];
   typedEl.textContent = deleting
     ? current.substring(0, charIndex--)
@@ -55,7 +60,7 @@ function type() {
   }
   setTimeout(type, delay);
 }
-type();
+if (typedEl) type();
 
 // Stats counter — reads live from DOM + GitHub API
 function animateCount(el, target) {
