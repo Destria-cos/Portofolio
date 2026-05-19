@@ -1,6 +1,7 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const scoreEl = document.getElementById("score");
+const stageEl = document.getElementById("stage");
 const highScoreEl = document.getElementById("highScore");
 const heartsEl = document.getElementById("hearts");
 const startScreen = document.getElementById("startScreen");
@@ -11,6 +12,7 @@ const restartBtn = document.getElementById("restartBtn");
 const retryBtn = document.getElementById("retryBtn");
 
 let score = 0;
+let currentStage = 1;
 let highScore = localStorage.getItem('pacmanHighScore') || 0;
 let lives = 3;
 let gameState = 'MENU'; // MENU, PLAYING, WON, GAME_OVER
@@ -95,21 +97,39 @@ function resetPositions() {
   }
 }
 
-function initGame() {
+function initGame(isRestart = true) {
+  if (isRestart instanceof Event) isRestart = true;
+  
   resizeCanvas();
   gameMap = [];
   ghosts = [];
   pellets = 0;
-  score = 0;
-  lives = 3;
+  
+  if (isRestart) {
+    score = 0;
+    lives = 3;
+    currentStage = 1;
+  }
+  
   gameState = 'PLAYING';
   
   highScoreEl.innerText = highScore;
   scoreEl.innerText = score;
+  if (stageEl) stageEl.innerText = currentStage;
   updateHearts();
   startScreen.classList.remove('show');
   winModal.classList.remove('show');
   loseModal.classList.remove('show');
+  
+  let targetGhosts = 2;
+  let initialSpeed = 0.05;
+  if (currentStage === 2) {
+    targetGhosts = 4;
+    initialSpeed = 0.07;
+  } else if (currentStage >= 3) {
+    targetGhosts = 6;
+    initialSpeed = 0.09;
+  }
   
   for(let r=0; r<ROWS; r++){
     gameMap[r] = [];
@@ -123,7 +143,14 @@ function initGame() {
         v = 2;
       }
       if (v === 4) {
-        ghosts.push({x: c, y: r, px: c, py: r, vx: 1, vy: 0, speed: 0.08, color: ['#ff0000', '#ffb8ff', '#00ffff'][ghosts.length%3]});
+        if (ghosts.length < targetGhosts) {
+          let colors = ['#ff0000', '#ffb8ff', '#00ffff', '#ffb852', '#00ff00', '#ff00ff'];
+          ghosts.push({
+            x: c, y: r, px: c, py: r, vx: 1, vy: 0, 
+            speed: initialSpeed, 
+            color: colors[ghosts.length % colors.length]
+          });
+        }
         v = 2;
       }
       gameMap[r][c] = v;
@@ -218,8 +245,13 @@ function updateEntity(ent, isPacman) {
         }
         pellets--;
         if (pellets === 0) {
-          gameState = 'WON';
-          winModal.classList.add('show');
+          if (currentStage >= 3) {
+            gameState = 'WON';
+            winModal.classList.add('show');
+          } else {
+            currentStage++;
+            initGame(false);
+          }
         }
       }
     } else {
@@ -247,7 +279,17 @@ function updateEntity(ent, isPacman) {
           ent.vx *= -1; ent.vy *= -1;
         } else if (isWall(ent.x + ent.vx, ent.y + ent.vy) || Math.random() < 0.25) {
           // Change direction if hitting wall or randomly at intersection
-          let opt = options[Math.floor(Math.random() * options.length)];
+          let smartChance = currentStage === 2 ? 0.4 : (currentStage >= 3 ? 0.7 : 0);
+          let opt;
+          if (Math.random() < smartChance) {
+             opt = options.reduce((best, curr) => {
+                 let currDist = Math.hypot(ent.x + curr.vx - pacman.x, ent.y + curr.vy - pacman.y);
+                 let bestDist = Math.hypot(ent.x + best.vx - pacman.x, ent.y + best.vy - pacman.y);
+                 return currDist < bestDist ? curr : best;
+             });
+          } else {
+             opt = options[Math.floor(Math.random() * options.length)];
+          }
           ent.vx = opt.vx; ent.vy = opt.vy;
         }
       }
@@ -376,7 +418,13 @@ function checkCollision() {
 function loop() {
   if (gameState === 'PLAYING') {
     updateEntity(pacman, true);
-    ghosts.forEach(g => updateEntity(g, false));
+    ghosts.forEach(g => {
+      // Stage 1 ghosts speed up over time
+      if (currentStage === 1 && g.speed < 0.12) {
+        g.speed += 0.00001; 
+      }
+      updateEntity(g, false);
+    });
     checkCollision();
   }
   
